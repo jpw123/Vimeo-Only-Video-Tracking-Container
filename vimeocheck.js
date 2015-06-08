@@ -1,11 +1,13 @@
-$(document).ready(vimeoCheck(true,true,true,true));
+$(document).ready(vimeoCheck(true,true,true,true,true));
 
-function vimeoCheck( modUrl, dataProgress, dataSeek, dataBounce) {
+function vimeoCheck( modUrl, dataProgress, dataSeek, dataBounce, fullScreen) {
 
 	modUrl = typeof modUrl !== 'undefined' ? modUrl : true;
 	dataProgress = typeof dataProgress !== 'undefined' ? dataProgress : true;
 	dataSeek = typeof dataSeek !== 'undefined' ? dataSeek : true;
 	dataBounce = typeof dataBounce !== 'undefined' ? dataBounce : false;
+	fullScreen = typeof fullScreen !== 'undefined' ? fullScreen : true;
+	
 	var id = 0;
     for (var e = document.getElementsByTagName('iframe'), x = e.length; x--;) {
 		if (/player.vimeo.com\/video/.test(e[x].src)) {
@@ -42,6 +44,18 @@ function vimeoCheck( modUrl, dataProgress, dataSeek, dataBounce) {
 			} else {
 				$(e[x]).attr('dataBounce', false);
 			}
+			
+			if (fullScreen) {
+				if (typeof $(e[x]).attr('webkitallowfullscreen') === typeof undefined) {
+					$(e[x]).attr('webkitallowfullscreen', '');
+				}
+				if (typeof $(e[x]).attr('mozallowfullscreen') === typeof undefined) {
+					$(e[x]).attr('mozallowfullscreen', '');
+				}
+				if (typeof $(e[x]).attr('allowfullscreen') === typeof undefined) {
+					$(e[x]).attr('allowfullscreen', '');
+				}
+			}
 	
 	
 			if (!loadVimeoScript.called) {
@@ -57,3 +71,4 @@ function loadVimeoScript() {
 	loadVimeoScript.called = true;
 	$.getScript('modules/vimeo.ga.js/vimeo.ga.js');
 }
+
