@@ -5,7 +5,7 @@ function vimeoCheck( modUrl, dataProgress, dataSeek, dataBounce, fullScreen, scr
 	dataSeek = typeof dataSeek !== 'undefined' ? dataSeek : true;
 	dataBounce = typeof dataBounce !== 'undefined' ? dataBounce : false;
 	fullScreen = typeof fullScreen !== 'undefined' ? fullScreen : true;
-	scriptUrl = typeof scriptUrl !== 'undefined' ? fullScreen : 'modules/vimeo.ga.js/vimeo.ga.js';
+	scriptUrl = typeof scriptUrl !== 'undefined' ? scriptUrl : 'modules/vimeo.ga.js/vimeo.ga.js';
 	
 	//Init counter and script loaded switch
 	var vimeoScriptLoaded = false;
