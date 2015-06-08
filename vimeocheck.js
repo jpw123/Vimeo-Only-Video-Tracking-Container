@@ -1,14 +1,16 @@
-$(document).ready(vimeoCheck(true,true,true,true,true));
-
-function vimeoCheck( modUrl, dataProgress, dataSeek, dataBounce, fullScreen) {
+function vimeoCheck( modUrl, dataProgress, dataSeek, dataBounce, fullScreen, scriptUrl) {
 
 	modUrl = typeof modUrl !== 'undefined' ? modUrl : true;
 	dataProgress = typeof dataProgress !== 'undefined' ? dataProgress : true;
 	dataSeek = typeof dataSeek !== 'undefined' ? dataSeek : true;
 	dataBounce = typeof dataBounce !== 'undefined' ? dataBounce : false;
 	fullScreen = typeof fullScreen !== 'undefined' ? fullScreen : true;
+	scriptUrl = typeof scriptUrl !== 'undefined' ? fullScreen : 'modules/vimeo.ga.js/vimeo.ga.js';
 	
+	//Init counter and script loaded switch
+	var vimeoScriptLoaded = false;
 	var id = 0;
+	
     for (var e = document.getElementsByTagName('iframe'), x = e.length; x--;) {
 		if (/player.vimeo.com\/video/.test(e[x].src)) {
 			if (modUrl && !(/\w?api=1/.test(e[x].src))) {
@@ -58,17 +60,12 @@ function vimeoCheck( modUrl, dataProgress, dataSeek, dataBounce, fullScreen) {
 			}
 	
 	
-			if (!loadVimeoScript.called) {
-				loadVimeoScript();
-				if (dataSeek == false || dataBounce == false || dataProgress == false || modUrl == false) break;
+			if (!vimeoScriptLoaded) {
+				var vimeoScriptLoaded = true;
+				$.getScript(scriptUrl);
 			} 
 			
 		}
     }
-}
-
-function loadVimeoScript() {
-	loadVimeoScript.called = true;
-	$.getScript('modules/vimeo.ga.js/vimeo.ga.js');
 }
 

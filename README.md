@@ -1,5 +1,7 @@
 # Vimeo-Tracker
-A js loader and iframe manipulator for the vimeo.ga.js library. Requires
+A js loader and iframe manipulator for the vimeo.ga.js library. Detects vimeo iframes, optionally modifies their URLS and adds attributes, and loads the vimeo.ga.js library.
+
+Builds on the vimeo.ga.js library from [Sander Heilbron.](https://github.com/sanderheilbron/vimeo.ga.js) 
 
 ## Install
 Requires Jquery version 1.4.3 or later.
