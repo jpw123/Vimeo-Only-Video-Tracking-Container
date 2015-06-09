@@ -15,15 +15,18 @@ function vimeoCheck( modUrl, dataProgress, dataSeek, dataBounce, fullScreen, scr
 		if (/player.vimeo.com\/video/.test(e[x].src)) {
 			if (modUrl && !(/\w?api=1/.test(e[x].src))) {
 				id++;
-				var pos = e[x].src.indexOf("?");
-				var api = 'api=1&';
-				if (pos < 0) {
-					var newSrc = e[x].src.concat('?' + api);
-				} else {
-					pos++;
-					var newSrc = [e[x].src.slice(0, pos), api, e[x].src.slice(pos)].join('');
+				var pos = e[x].src.indexOf("?") + 1;
+				var params = e[x].src.substring(pos).split(/\&(.+)/);
+				var api = 'api=1';
+				var player = 'player_id';
+				if ($.inArray(player, params) === -1) {
+					params.unshift('player_id=' + id);
 				}
-				$(e[x]).attr('src', newSrc + '&player_id=vimeo-player-' + id);
+				if ($.inArray(api, params) === -1) {
+					params.unshift('api=1');
+				}
+				var newSrc = params.join('&');
+				$(e[x]).attr('src', '?' + newSrc);
 				$(e[x]).attr('id', 'vimeo-player-' + id);
 				
 				
