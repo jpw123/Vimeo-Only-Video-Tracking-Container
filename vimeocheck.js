@@ -13,7 +13,7 @@ function vimeoCheck( modUrl, dataProgress, dataSeek, dataBounce, fullScreen, scr
 	
     for (var e = document.getElementsByTagName('iframe'), x = e.length; x--;) {
 		if (/player.vimeo.com\/video/.test(e[x].src)) {
-			if (modUrl && !(/\w?api=1/.test(e[x].src))) {
+			if (modUrl) {
 				id++;
 				var pos = e[x].src.indexOf("?") + 1;
 				var params = e[x].src.substring(pos).split(/\&(.+)/);
@@ -24,7 +24,7 @@ function vimeoCheck( modUrl, dataProgress, dataSeek, dataBounce, fullScreen, scr
 				}
 				if ($.inArray(api, params) === -1) {
 					params.unshift('api=1');
-				}
+				
 				var newSrc = params.join('&');
 				$(e[x]).attr('src', '?' + newSrc);
 				$(e[x]).attr('id', 'vimeo-player-' + id);
