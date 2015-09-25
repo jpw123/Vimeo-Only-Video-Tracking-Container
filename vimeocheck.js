@@ -71,4 +71,4 @@ function vimeoCheck( modUrl, dataProgress, dataSeek, dataBounce, fullScreen, scr
 		}
     }
 }
-
+}
